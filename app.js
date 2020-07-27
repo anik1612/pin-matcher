@@ -1,73 +1,86 @@
-// make generateBtn functional  
-const generateBtn = document.getElementById('generate-btn');
+//get all essential DOM element from html
 const generatePinDisplay = document.getElementById('generatePinDisplay');
+const calcDisplay = document.getElementById('calcDisplay');
+const matchNotify = document.getElementById('match');
+const notMatchNotify = document.getElementById('not-match');
+const tryLeft = document.getElementById('try-left');
 
-//generate pin btn eventListener
-generateBtn.addEventListener('click', function () {
-    var generatePin = generateRandomNumber();
-    generatePinDisplay.value = generatePin;
+// make notify section hidden 
+matchNotify.style.display = 'none';
+notMatchNotify.style.display = 'none';
+
+// make generatePinBtn functional  
+const generatePinBtn = document.getElementById('generate-btn');
+generatePinBtn.addEventListener('click', function () {
+    const generatePin = generateRandomNumber(); // call generateRandomNumber function
+    generatePinDisplay.value = generatePin; // display generate pin value 
 })
 
 
-// get all button together
+// get all button together using button class name
 const calcBtn = document.getElementsByClassName('button');
-const calcDisplay = document.getElementById('calcDisplay');
-
 for (let i = 0; i < calcBtn.length; i++) {
     const btn = calcBtn[i];
     btn.addEventListener('click', function (event) {
-        const btnClicked = event.target;
+        const btnClicked = event.target; // get target button
+        //if C pressed set calc display value to empty
         if (btnClicked.innerText == 'C') {
             calcDisplay.value = "";
         }
+        // if < pressed reduce last character of string
         else if (btnClicked.innerText == '<') {
             let str = calcDisplay.value;
             newStr = str.substring(0, str.length - 1);
             calcDisplay.value = newStr;
         }
+        // if upper two condition is not true then execute this block
         else {
             calcDisplay.value += btnClicked.innerText;
         }
-
     })
 }
 
-const matchNotify = document.getElementById('match');
-matchNotify.style.display = 'none';
-const notMatchNotify = document.getElementById('not-match');
-notMatchNotify.style.display = 'none';
 
-const tryLeft = document.getElementById('try-left');
 //make submit button functional
 const submitBtn = document.getElementById('submit-btn');
 submitBtn.addEventListener('click', function () {
-    if(calcDisplay.value === ""){
+
+    //input field validation check
+    if (calcDisplay.value === "" && generatePinDisplay.value === "" || calcDisplay.value === "" || generatePinDisplay.value === "") {
         alert('input can not be blank');
-    }
-    else{
+    } else {
         // compare generatePin Value with calcDisplay Value
-    if (generatePinDisplay.value == calcDisplay.value) {
+        if (generatePinDisplay.value == calcDisplay.value) {
+            isMatched(true);
+        }
+        // if not matching then execute this block
+        else {
+            isMatched(false);
+        }
+    }
+})
+
+
+// generate random number function
+function generateRandomNumber() {
+    const randValue = Math.floor(1000 + Math.random() * 9000); // generate number from 1000 - 9999
+    return randValue;
+}
+
+// isMatched function 
+function isMatched(value) {
+    if (value === true) {
         matchNotify.style.display = 'block';
         notMatchNotify.style.display = 'none';
     }
-    
     else {
         notMatchNotify.style.display = 'block';
         matchNotify.style.display = 'none';
-        tryLeftCount = parseInt(tryLeft.innerText);
         tryLeft.innerText -= 1;
-        if (tryLeft.innerText === '0'){
+        // if no try left then make submit btn disabled 
+        if (tryLeft.innerText === '0') {
             submitBtn.disabled = true;
             submitBtn.style.opacity = '50%';
         }
     }
-    }
-    
-})
-
-
-// generate random number from 1000 - 9999 
-function generateRandomNumber() {
-    var randValue = Math.floor(1000 + Math.random() * 9000);
-    return randValue;
 }
