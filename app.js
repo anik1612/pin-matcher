@@ -44,8 +44,10 @@ submitBtn.addEventListener('click', function () {
     if (generatePinDisplay.value == calcDisplay.value) {
         matchNotify.style.display = 'block';
     }
+    
     else {
         notMatchNotify.style.display = 'block';
+        matchNotify.style.display = 'none';
         tryLeftCount = parseInt(tryLeft.innerText);
         tryLeft.innerText -= 1;
         if (tryLeft.innerText === '0'){
