@@ -1,7 +1,8 @@
 // make generateBtn functional  
 const generateBtn = document.getElementById('generate-btn');
-generatePinDisplay = document.getElementById('generatePinDisplay');
+const generatePinDisplay = document.getElementById('generatePinDisplay');
 
+//generate pin btn eventListener
 generateBtn.addEventListener('click', function () {
     var generatePin = generateRandomNumber();
     generatePinDisplay.value = generatePin;
@@ -10,7 +11,7 @@ generateBtn.addEventListener('click', function () {
 
 // get all button together
 const calcBtn = document.getElementsByClassName('button');
-calcDisplay = document.getElementById('calcDisplay');
+const calcDisplay = document.getElementById('calcDisplay');
 
 for (let i = 0; i < calcBtn.length; i++) {
     const btn = calcBtn[i];
@@ -47,6 +48,7 @@ submitBtn.addEventListener('click', function () {
         // compare generatePin Value with calcDisplay Value
     if (generatePinDisplay.value == calcDisplay.value) {
         matchNotify.style.display = 'block';
+        notMatchNotify.style.display = 'none';
     }
     
     else {
