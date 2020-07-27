@@ -29,7 +29,7 @@ for (let i = 0; i < calcBtn.length; i++) {
         }
         // if < pressed reduce last character of string
         else if (btnClicked.innerText == '<') {
-            let str = calcDisplay.value;
+            const str = calcDisplay.value;
             newStr = str.substring(0, str.length - 1);
             calcDisplay.value = newStr;
         }
@@ -46,9 +46,17 @@ const submitBtn = document.getElementById('submit-btn');
 submitBtn.addEventListener('click', function () {
 
     //input field validation check
-    if (calcDisplay.value === "" && generatePinDisplay.value === "" || calcDisplay.value === "" || generatePinDisplay.value === "") {
-        alert('input can not be blank');
-    } else {
+    if (calcDisplay.value === "" && generatePinDisplay.value === "") {
+        alert('Please Generate Pin first then Submit it to Pin entry field');
+    }
+    else if (generatePinDisplay.value === "") {
+        alert('Please Generate Pin First')
+    } 
+    else if(calcDisplay.value === ""){
+        alert('Field Empty, Please Enter Your Generated Pin Number');
+    }
+    
+    else {
         // compare generatePin Value with calcDisplay Value
         if (generatePinDisplay.value == calcDisplay.value) {
             isMatched(true);
@@ -67,7 +75,7 @@ function generateRandomNumber() {
     return randValue;
 }
 
-// isMatched function 
+// isMatched function
 function isMatched(value) {
     if (value === true) {
         matchNotify.style.display = 'block';
