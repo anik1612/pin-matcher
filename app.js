@@ -40,7 +40,11 @@ const tryLeft = document.getElementById('try-left');
 //make submit button functional
 const submitBtn = document.getElementById('submit-btn');
 submitBtn.addEventListener('click', function () {
-    // compare generatePin Value with calcDisplay Value
+    if(calcDisplay.value === ""){
+        alert('input can not be blank');
+    }
+    else{
+        // compare generatePin Value with calcDisplay Value
     if (generatePinDisplay.value == calcDisplay.value) {
         matchNotify.style.display = 'block';
     }
@@ -55,6 +59,8 @@ submitBtn.addEventListener('click', function () {
             submitBtn.style.opacity = '50%';
         }
     }
+    }
+    
 })
 
 
