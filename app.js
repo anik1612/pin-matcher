@@ -80,6 +80,7 @@ function isMatched(value) {
     if (value === true) {
         matchNotify.style.display = 'block';
         notMatchNotify.style.display = 'none';
+        calcDisplay.value = '';
     }
     else {
         notMatchNotify.style.display = 'block';
