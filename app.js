@@ -29,11 +29,11 @@ for (let i = 0; i < calcBtn.length; i++) {
         }
         // if < pressed reduce last character of string
         else if (btnClicked.innerText == '<') {
-            const str = calcDisplay.value;
-            newStr = str.substring(0, str.length - 1);
-            calcDisplay.value = newStr;
+            const str = calcDisplay.value; 
+            newStr = str.substring(0, str.length - 1); // remove last character from string 
+            calcDisplay.value = newStr; // set new string value to calc display
         }
-        // if upper two condition is not true then execute this block
+        // when upper two condition is not true then this block will execute
         else {
             calcDisplay.value += btnClicked.innerText;
         }
